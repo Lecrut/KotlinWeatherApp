@@ -36,6 +36,16 @@ android {
 }
 
 dependencies {
+    implementation (libs.moshi)
+
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.fragment.ktx)
+
+    annotationProcessor (libs.compiler)
+    implementation(libs.androidx.viewpager2)
+    implementation (libs.material.v110alpha08)
+    implementation (libs.autofittextview)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -43,6 +53,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.retrofit)
+    implementation (libs.logging.interceptor)
+    implementation (libs.glide)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     testImplementation(libs.junit)
