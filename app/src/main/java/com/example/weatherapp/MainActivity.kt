@@ -6,17 +6,25 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherapp.citiesData.Location
 import com.example.weatherapp.citiesData.cities
+import com.example.weatherapp.forecastData.forecast
+import com.example.weatherapp.phone.FastViewPhone
+import com.example.weatherapp.tablet.FastViewTablet
+import com.example.weatherapp.utils.Distance
+import com.example.weatherapp.utils.Temperatures
 import com.google.gson.Gson
+import layout.weatherData
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
+import kotlin.math.min
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +32,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var search_button: Button
 
     var selectedCity: String = ""
+    var listOfCities: MutableSet<String>? = null
+    var actualTempUnit: Temperatures = Temperatures.CELSIUS
+    var actualDistUnit: Distance = Distance.METERS
 
     var apiKey: String = "8e5f50d6100ca5b69804a5694b8614a8"
 
@@ -74,6 +85,110 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun removeWeatherData(location: String) {
+        val sharedPreferences = getSharedPreferences(location, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("weather")
+        editor.apply()
+    }
+
+    private fun removeForecastData(location: String) {
+        val sharedPreferences = getSharedPreferences(location, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("forecast")
+        editor.apply()
+    }
+
+    private fun saveWeatherData(weather: weatherData, city: String) {
+        if (listOfCities?.contains(city) == true) {
+            removeWeatherData(city)
+        }
+        val sharedPreferences = getSharedPreferences(city, Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        val gson = Gson()
+        val json = gson.toJson(weather)
+        editor?.putString("weather", json)
+        editor?.apply()
+    }
+
+    private fun saveForecastData(forecast: forecast, city: String) {
+        if (listOfCities?.contains(city) == true) {
+            removeForecastData(city)
+        }
+        val sharedPreferences = getSharedPreferences(city, Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        val gson = Gson()
+        val json = gson.toJson(forecast)
+        editor?.putString("forecast", json)
+        editor?.apply()
+    }
+
+    private fun getWeather(city: String) {
+        val url = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&lang=pl"
+
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        val client = OkHttpClient.Builder()
+            .cache(null)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.v("API-Geolocations", e.toString())
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val json = response.body?.string()
+                if (json != null) {
+                    Log.v("API-Geolocations", json)
+
+                }
+                if (response.isSuccessful && json != null) {
+                    val weatherData = Gson().fromJson(json, weatherData::class.java)
+                    saveWeatherData(weatherData, city)
+
+                } else {
+                    Log.v("API-Geolocations", "Incorrect location")
+                }
+            }
+        })
+    }
+
+
+    private fun getForecast(city: String) {
+        val url = "https://api.openweathermap.org/data/2.5/forecast?q=$city&appid=$apiKey&lang=pl"
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Cache-Control", "no-cache")
+            .build()
+
+        val client = OkHttpClient.Builder()
+            .cache(null)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.v("API-Geolocations", e.toString())
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val json = response.body?.string()
+                if (json != null) {
+                    Log.v("API-Geolocations", json)
+                }
+                if (response.isSuccessful && json != null) {
+                    val forecastData: forecast = Gson().fromJson(json, forecast::class.java)
+                    saveForecastData(forecastData, city)
+                } else {
+                    Log.v("API-Geolocations", "Incorrect location")
+                }
+            }
+        })
+    }
+
     private fun openDialogWithCities(context: Context, searchedCities: cities){
         val citiesList = mutableListOf<Location>()
         var counter = 0
@@ -91,37 +206,37 @@ class MainActivity : AppCompatActivity() {
             val check = citiesList[which]
             selectedCity = check.name + ',' + check.country
 
-//            fetchWeather(selectedCity)
-//            fetchForecast(selectedCity)
+            getWeather(selectedCity)
+            getForecast(selectedCity)
 
             builder.setTitle("NOWA LOKALIZACJA")
             builder.setMessage(selectedCity)
-//            builder.setNeutralButton("Otwórz") { dialog, which ->
-//                if(!isTablet()){
-//                    val intent = Intent(this, QuickWeatherView::class.java)
-//                    intent.putExtra("location", check.name)
-//                    intent.putExtra("tempUnit", actualTempUnit.toString())
-//                    intent.putExtra("distUnit", actualDistUnit.toString())
-//                    startActivity(intent)
-//                }
-//                else {
-//                    val intent = Intent(this, QuickWeatherTablet::class.java)
-//                    intent.putExtra("location", check.name)
-//                    intent.putExtra("tempUnit", actualTempUnit.toString())
-//                    intent.putExtra("distUnit", actualDistUnit.toString())
-//                    startActivity(intent)
-//                }
-//            }
-//            builder.setPositiveButton("Dodaj do listy") { dialog, which ->
-//                var locationList = allCities as MutableSet<String>
-//                val added: Set<String> = (locationList + check.name).toSet()
-//                saveLocations(added)
+            builder.setNeutralButton("Otwórz") { dialog, which ->
+                if(!isTablet()){
+                    val intent = Intent(this@MainActivity, FastViewPhone::class.java)
+                    intent.putExtra("location", check.name)
+                    intent.putExtra("tempUnit", actualTempUnit.toString())
+                    intent.putExtra("distUnit", actualDistUnit.toString())
+                    startActivity(intent)
+                }
+                else {
+                    val intent = Intent(this@MainActivity, FastViewTablet::class.java)
+                    intent.putExtra("location", check.name)
+                    intent.putExtra("tempUnit", actualTempUnit.toString())
+                    intent.putExtra("distUnit", actualDistUnit.toString())
+                    startActivity(intent)
+                }
+            }
+            builder.setPositiveButton("Dodaj do listy") { dialog, which ->
+                val locationList = listOfCities as MutableSet<String>
+                val added: Set<String> = (locationList + check.name).toSet()
+                saveLocations(added)
 //                addButtonWithRemoveButton(layout, added.size - 1, check.name)
-//                fetchWeather(selectedCity)
-//                fetchForecast(selectedCity)
-//                allCities = added as MutableSet<String>
-//                city_input.text.clear()
-//            }
+                getWeather(selectedCity)
+                getForecast(selectedCity)
+                listOfCities = added as MutableSet<String>
+                city_input.text.clear()
+            }
             builder.setNegativeButton("Zamknij") { dialog, which ->
                 city_input.text.clear()
             }
@@ -133,6 +248,22 @@ class MainActivity : AppCompatActivity() {
 
         builder.show()
     }
+    fun saveLocations(locations: Set<String>) {
+        val sharedPreferences = getSharedPreferences("city_list", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(locations)
+        Log.v("flaga json", json)
+        editor.putString("locations", json)
+        editor.apply()
+    }
 
+    private fun isTablet(): Boolean {
+        val metrics = resources.displayMetrics
+        val dpWidth = metrics.widthPixels / metrics.density
+        val dpHeight = metrics.heightPixels / metrics.density
+        val smallestWidth = min(dpWidth, dpHeight)
+        return smallestWidth >= 600
+    }
 
 }
