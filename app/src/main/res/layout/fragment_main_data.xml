@@ -4,8 +4,9 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_centerInParent="true">
-<!--    android:background="@drawable/day_weather_background">-->
+    android:layout_centerInParent="true"
+    android:background="@color/background_one"
+    >
 
     <LinearLayout
         android:id="@+id/firstView"

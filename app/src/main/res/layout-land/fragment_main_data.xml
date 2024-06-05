@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_centerInParent="true"
+    android:background="@color/background_one"
     >
-<!--    android:background="@drawable/day_weather_background"-->
+
     <LinearLayout
         android:id="@+id/firstView"
         android:layout_width="match_parent"
