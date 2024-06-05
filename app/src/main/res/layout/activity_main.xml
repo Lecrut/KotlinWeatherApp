@@ -39,4 +39,20 @@
             />
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/cityListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+<!--        android:layout_below="@id/changeUnitsLayout">-->
+
+        <LinearLayout
+            android:id="@+id/cityList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

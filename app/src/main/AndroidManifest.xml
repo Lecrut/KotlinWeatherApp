@@ -20,10 +20,10 @@
 
         <activity
             android:name=".MainActivity"
+            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,28 +31,28 @@
         <activity
             android:name=".tablet.FastViewTablet"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden"
+            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
             android:launchMode="singleInstance">
         </activity>
 
         <activity
             android:name=".phone.FastViewPhone"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden"
+            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
             android:launchMode="singleInstance">
         </activity>
 
         <activity
             android:name=".tablet.WeatherViewTablet"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden"
+            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
             android:launchMode="singleInstance">
         </activity>
 
         <activity
             android:name=".phone.WeatherViewPagerPhone"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden"
+            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
             android:launchMode="singleInstance">
         </activity>
 

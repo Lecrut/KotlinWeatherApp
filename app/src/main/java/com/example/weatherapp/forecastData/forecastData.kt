@@ -1,6 +1,6 @@
 package com.example.weatherapp.forecastData
 
-data class forecast (
+data class forecastData (
     val city: City,
     val cnt: Int,
     val cod: String,

@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     >
+
 <!--    android:background="@drawable/day_weather_background"-->
+
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -34,9 +36,9 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
-                android:textSize="20sp"
-                android:text="Jutro"
                 android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
+                android:text="Jutro"
                 android:textColor="@color/white"/>
 
             <TextView
@@ -47,8 +49,8 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
-                android:textSize="20sp"
                 android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
                 android:textColor="@color/white"
                 android:text="27°C"/>
 
@@ -75,8 +77,8 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
-                android:textSize="20sp"
                 android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
                 android:text="@string/secondDay"
                 android:textColor="@color/white"/>
 
@@ -88,8 +90,8 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
-                android:textSize="20sp"
                 android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
                 android:textColor="@color/white"
                 android:text="27°C"/>
 
@@ -106,8 +108,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:src="@drawable/sun" />
+                android:src="@drawable/few_clouds" />
 
             <TextView
                 android:id="@+id/thirdDay"
@@ -118,7 +119,7 @@
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:text="Środa"
                 android:textColor="@color/white"/>
 
@@ -131,7 +132,7 @@
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textColor="@color/white"
                 android:text="27°C"/>
         </LinearLayout>
@@ -147,7 +148,6 @@
                 android:id="@+id/weatherIconFourth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
                 android:layout_weight="1"
                 android:src="@drawable/sun" />
 
@@ -159,8 +159,8 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
-                android:textSize="20sp"
                 android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
                 android:text="Poniedziałek"
                 android:textColor="@color/white"/>
 
@@ -173,7 +173,7 @@
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textColor="@color/white"
                 android:text="27°C"/>
         </LinearLayout>
@@ -199,9 +199,9 @@
                 android:layout_weight="1"
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
-                android:fontFamily="sans-serif-condensed"
                 android:autoSizeStepGranularity="2sp"
-                android:textSize="20sp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
                 android:text="Środa"
                 android:textColor="@color/white"/>
 
@@ -213,8 +213,8 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
-                android:textSize="20sp"
                 android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
                 android:textColor="@color/white"
                 android:text="27°C"/>
         </LinearLayout>
