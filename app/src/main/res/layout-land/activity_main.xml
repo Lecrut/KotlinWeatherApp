@@ -39,12 +39,38 @@
             />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        >
+        <Button
+            android:id="@+id/fetchData"
+            android:text="@string/fetchData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="sans-serif-medium"
+            />
+        <Button
+            android:id="@+id/deleteCity"
+            android:text="@string/deleteCities"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="sans-serif-medium"
+            />
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/cityListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <!--        android:layout_below="@id/changeUnitsLayout">-->
 
         <LinearLayout
             android:id="@+id/cityList"

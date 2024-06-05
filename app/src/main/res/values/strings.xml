@@ -12,4 +12,6 @@
     <string name="secondDay">Pojutrze</string>
     <string name="windDirection">Kierunek wiatru</string>
     <string name="sensed_temp">Odczuwalne: </string>
+    <string name="fetchData">Uaktualnij dane</string>
+    <string name="deleteCities">Wyczyść listę</string>
 </resources>

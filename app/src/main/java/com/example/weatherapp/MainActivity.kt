@@ -3,11 +3,13 @@ package com.example.weatherapp
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherapp.citiesData.Location
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         search_button = findViewById<Button>(R.id.find_city)
         layout = findViewById<LinearLayout>(R.id.cityList)
 
-        val locationList: Set<String> = loadLocations()
+        var locationList: Set<String> = loadLocations()
         listOfCities = locationList.toMutableSet()
 
         search_button.setOnClickListener {
@@ -66,6 +68,38 @@ class MainActivity : AppCompatActivity() {
         }
 
         runTimer()
+
+        val dataFetchBtn: Button = findViewById(R.id.fetchData)
+        dataFetchBtn.setOnClickListener {
+            val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork = connectivityManager.activeNetworkInfo
+            val isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting
+
+            if(isConnected){
+                locationList = listOfCities as MutableSet<String>
+                if (locationList.isNotEmpty()) {
+                    locationList.forEach { location, ->
+                        getWeather(location)
+                        getForecast(location)
+                    }
+                }
+                Toast.makeText(this, "Pobrano najnowsze dane", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(this, "Brak połączenia z internetem", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val cityRemoveBtn: Button = findViewById(R.id.deleteCity)
+        cityRemoveBtn.setOnClickListener {
+            val list = locationList.toMutableSet()
+            clearAllCities(layout, list)
+            list.clear()
+            locationList = list.toSet()
+            listOfCities = locationList.toMutableSet()
+            layout.removeAllViews()
+            Log.v("MIASTA: clearAll(): ", loadLocations().toString())
+        }
 
 
     }
@@ -378,6 +412,21 @@ class MainActivity : AppCompatActivity() {
             }
         },0,  15000
         )
+    }
+    private fun removeButton(layout: LinearLayout, buttonId: Int) {
+        val button = findViewById<Button>(buttonId)
+        layout.removeView(button)
+    }
+
+    private fun clearAllCities(layout: LinearLayout, cityList: MutableSet<String>) {
+        cityList.forEachIndexed { id, city ->
+            Log.v("MIASTA: usuwam: ", city)
+            removeButton(layout, id)
+            removeLocation(city)
+        }
+        cityList.clear()
+        listOfCities = cityList
+        saveLocations(cityList)
     }
 
 }
