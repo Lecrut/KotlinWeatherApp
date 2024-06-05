@@ -77,7 +77,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Odczuwalne: "
+                android:text="@string/sensed_temp"
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeStepGranularity="2sp"
@@ -124,11 +124,15 @@
                 android:textSize="20sp"
                 android:fontFamily="sans-serif"
                 android:textColor="@color/white"/>
-
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"/>
-
+        </LinearLayout>
+<!--            <Space-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="wrap_content"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
             <TextView
                 android:id="@+id/textMax"
                 android:layout_width="wrap_content"

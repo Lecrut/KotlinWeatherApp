@@ -2,8 +2,8 @@
     <string name="app_name">WeatherApp</string>
     <string name="search">Znajdź</string>
     <string name="give_city_name">Podaj nazwe miejscowosci</string>
-    <string name="temp_min">Minimalna temperatura</string>
-    <string name="temp_max">Maksymalna temperatura</string>
+    <string name="temp_min">Minimalna temperatura </string>
+    <string name="temp_max">Maksymalna temperatura </string>
     <string name="wind">Wiatr</string>
     <string name="visibility">Przejrzystość</string>
     <string name="clouds">Zachmurzenie</string>
@@ -11,4 +11,5 @@
     <string name="pressure">Ciśnienie</string>
     <string name="secondDay">Pojutrze</string>
     <string name="windDirection">Kierunek wiatru</string>
+    <string name="sensed_temp">Odczuwalne: </string>
 </resources>
