@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         var locationList: Set<String> = loadLocations()
         listOfCities = locationList.toMutableSet()
 
+        fetchData(layout)
+
         search_button.setOnClickListener {
             val cityName: String = city_input.text.toString()
             if (cityName.isNotEmpty())
@@ -303,7 +305,7 @@ class MainActivity : AppCompatActivity() {
 
         builder.show()
     }
-    fun saveLocations(locations: Set<String>) {
+    private fun saveLocations(locations: Set<String>) {
         val sharedPreferences = getSharedPreferences("city_list", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val gson = Gson()
@@ -319,6 +321,16 @@ class MainActivity : AppCompatActivity() {
         val dpHeight = metrics.heightPixels / metrics.density
         val smallestWidth = min(dpWidth, dpHeight)
         return smallestWidth >= 600
+    }
+
+    private fun fetchData(layout: LinearLayout) {
+        if(listOfCities?.isNotEmpty() == true){
+            listOfCities?.forEachIndexed{id, location ->
+                getWeather(location)
+                getForecast(location)
+                listOfCities?.size?.let { addButtonWithRemoveButton(layout, it, location) }
+            }
+        }
     }
 
     private fun addButtonWithRemoveButton(layout: LinearLayout, buttonId: Int, location: String) {
