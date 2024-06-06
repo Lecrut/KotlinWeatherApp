@@ -271,14 +271,14 @@ class MainActivity : AppCompatActivity() {
             builder.setNeutralButton("Otwórz") { dialog, which ->
                 if(!isTablet()){
                     val intent = Intent(this, FastViewPhone::class.java)
-                    intent.putExtra("location", check.name)
+                    intent.putExtra("location", selectedCity)
                     intent.putExtra("tempUnit", actualTempUnit.toString())
                     intent.putExtra("distUnit", actualDistUnit.toString())
                     startActivity(intent)
                 }
                 else {
                     val intent = Intent(this, FastViewTablet::class.java)
-                    intent.putExtra("location", check.name)
+                    intent.putExtra("location", selectedCity)
                     intent.putExtra("tempUnit", actualTempUnit.toString())
                     intent.putExtra("distUnit", actualDistUnit.toString())
                     startActivity(intent)

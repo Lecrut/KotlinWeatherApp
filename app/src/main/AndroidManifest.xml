@@ -32,28 +32,28 @@
         <activity
             android:name=".tablet.FastViewTablet"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
+            android:configChanges="screenSize|screenLayout|keyboardHidden"
             android:launchMode="singleInstance">
         </activity>
 
         <activity
             android:name=".phone.FastViewPhone"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
+            android:configChanges="screenSize|screenLayout|keyboardHidden"
             android:launchMode="singleInstance">
         </activity>
 
         <activity
             android:name=".tablet.WeatherViewTablet"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
+            android:configChanges="screenSize|screenLayout|keyboardHidden"
             android:launchMode="singleInstance">
         </activity>
 
         <activity
             android:name=".phone.WeatherViewPagerPhone"
             android:exported="true"
-            android:configChanges="screenSize|screenLayout|keyboardHidden|orientation"
+            android:configChanges="screenSize|screenLayout|keyboardHidden"
             android:launchMode="singleInstance">
         </activity>
 
