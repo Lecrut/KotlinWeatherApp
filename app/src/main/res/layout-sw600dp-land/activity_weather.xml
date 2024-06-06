@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            >
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_basic_weather"
                 android:name="com.example.weatherapp.fragments.MainDataFragment"
@@ -31,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="5"
             >
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_additional_data"
