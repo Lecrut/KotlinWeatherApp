@@ -6,9 +6,13 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -68,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         runTimer()
+        setTempSettings()
+        setDistSettings()
 
         val dataFetchBtn: Button = findViewById(R.id.fetchData)
         dataFetchBtn.setOnClickListener {
@@ -262,14 +268,14 @@ class MainActivity : AppCompatActivity() {
             builder.setMessage(selectedCity)
             builder.setNeutralButton("Otwórz") { dialog, which ->
                 if(!isTablet()){
-                    val intent = Intent(this@MainActivity, FastViewPhone::class.java)
+                    val intent = Intent(this, FastViewPhone::class.java)
                     intent.putExtra("location", check.name)
                     intent.putExtra("tempUnit", actualTempUnit.toString())
                     intent.putExtra("distUnit", actualDistUnit.toString())
                     startActivity(intent)
                 }
                 else {
-                    val intent = Intent(this@MainActivity, FastViewTablet::class.java)
+                    val intent = Intent(this, FastViewTablet::class.java)
                     intent.putExtra("location", check.name)
                     intent.putExtra("tempUnit", actualTempUnit.toString())
                     intent.putExtra("distUnit", actualDistUnit.toString())
@@ -427,6 +433,68 @@ class MainActivity : AppCompatActivity() {
         cityList.clear()
         listOfCities = cityList
         saveLocations(cityList)
+    }
+
+    private fun saveSettings(temp: Temperatures, dist: Distance) {
+        val sharedPreferences = getSharedPreferences("city_list", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val jsonTemp = gson.toJson(temp)
+        editor.putString("temperature", jsonTemp)
+        val jsonDist = gson.toJson(dist)
+        editor.putString("distance", jsonDist)
+        editor.apply()
+    }
+
+    private fun setTempSettings() {
+        val tempSpinner = findViewById<Spinner>(R.id.chooseTempUnits)
+        val tempUnits = arrayOf("Celsjusze", "Kelviny", "Farenhajty")
+        val adapterTemp = ArrayAdapter(this, android.R.layout.simple_spinner_item, tempUnits)
+        tempSpinner.adapter = adapterTemp
+        tempSpinner.setSelection(0)
+
+        tempSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val unit = parent?.getItemAtPosition(position).toString()
+                actualTempUnit = when(unit) {
+                    "Kelviny" -> Temperatures.KELVINS
+                    "Celsjusze" -> Temperatures.CELSIUS
+                    "Farenhajty" -> Temperatures.FAHRENHEITS
+                    else -> Temperatures.CELSIUS
+                }
+                saveSettings(actualTempUnit, actualDistUnit)
+                Toast.makeText(parent?.context, "Wybrano: $unit", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                actualTempUnit = Temperatures.CELSIUS
+            }
+        }
+    }
+
+    private fun setDistSettings() {
+        val distSpinner = findViewById<Spinner>(R.id.chooseDistUnits)
+        val distUnits = arrayOf("Metry", "Mile")
+        val adapterDist = ArrayAdapter(this, android.R.layout.simple_spinner_item, distUnits)
+        distSpinner.adapter = adapterDist
+        distSpinner.setSelection(0)
+
+        distSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val unit = parent?.getItemAtPosition(position).toString()
+                actualDistUnit = when(unit) {
+                    "Metry" -> Distance.METERS
+                    "Mile" -> Distance.MILES
+                    else -> Distance.METERS
+                }
+                saveSettings(actualTempUnit, actualDistUnit)
+                Toast.makeText(parent?.context, "Wybrano: $unit", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                actualDistUnit = Distance.METERS
+            }
+        }
     }
 
 }

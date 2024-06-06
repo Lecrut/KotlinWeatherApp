@@ -14,4 +14,5 @@
     <string name="sensed_temp">Odczuwalne: </string>
     <string name="fetchData">Uaktualnij dane</string>
     <string name="deleteCities">Wyczyść listę</string>
+    <string name="set_units">Ustaw jednostki</string>
 </resources>

@@ -66,6 +66,46 @@
             />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/changeUnitsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2"
+        >
+        <TextView
+            android:id="@+id/cityName"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/set_units"
+            android:layout_gravity="center"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="150sp"
+            android:autoSizeStepGranularity="2sp"
+            android:textSize="20sp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/chooseTempUnits"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+
+            <Spinner
+                android:id="@+id/chooseDistUnits"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/cityListView"
         android:layout_width="match_parent"

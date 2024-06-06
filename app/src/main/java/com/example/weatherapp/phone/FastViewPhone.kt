@@ -171,7 +171,6 @@ class FastViewPhone : AppCompatActivity() {
         val json = sharedPreferences.getString("locations", null)
         val type = object : TypeToken<Set<String>>() {}.type
         var locations: Set<String> = gson.fromJson(json, type)
-        Log.v("MIASTA: usuwam lokalizacje: ", locationToRemove)
         if (locations.contains(locationToRemove)) {
             locations = locations.filter { it != locationToRemove }.toSet()
             val editor = sharedPreferences.edit()
