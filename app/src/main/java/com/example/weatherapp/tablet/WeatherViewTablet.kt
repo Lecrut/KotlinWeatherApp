@@ -57,7 +57,6 @@ class WeatherViewTablet : AppCompatActivity() {
     }
     override fun onPause() {
         super.onPause()
-//        this.finish()
         timer.cancel()
     }
 
