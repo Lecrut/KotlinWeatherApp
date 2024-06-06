@@ -2,7 +2,6 @@ package com.example.weatherapp.tablet
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -86,7 +85,6 @@ class ViewAdapterTablet(private val activity: FragmentActivity, loc: String, tem
     private fun setAdditionalFrag() : AdditionalDataFragment {
         val additionalDataFrag = AdditionalDataFragment()
         val bundle = Bundle()
-        Log.v("basic1", weather.toString())
 
         bundle.putString("pressure", weather?.main?.pressure.toString() + " hPa")
         bundle.putString("humidity", weather?.main?.humidity.toString() +  " %")
@@ -96,7 +94,6 @@ class ViewAdapterTablet(private val activity: FragmentActivity, loc: String, tem
         bundle.putString("visibility", visibilityConvert(weather?.visibility.toString(), distUnit))
 
         additionalDataFrag.arguments = bundle
-//        addFragment(R.id.fragment_additional_data, additionalDataFrag)
         return additionalDataFrag
     }
 
@@ -222,7 +219,6 @@ class ViewAdapterTablet(private val activity: FragmentActivity, loc: String, tem
             override fun run() {
                 loadForecastData()
                 loadWeatherData()
-                Log.v("TIMER: aktualizacja dla: ", location)
             }
         },0,  1000
         )

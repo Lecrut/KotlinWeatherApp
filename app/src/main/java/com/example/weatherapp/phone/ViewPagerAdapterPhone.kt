@@ -2,7 +2,6 @@ package com.example.weatherapp.phone
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -84,7 +83,6 @@ class ViewPagerAdapterPhone(private val activity: FragmentActivity, loc: String,
     private fun setAdditionalFrag() : AdditionalDataFragment {
         val additionalDataFrag = AdditionalDataFragment()
         val bundle = Bundle()
-        Log.v("basic1", weather.toString())
 
         bundle.putString("pressure", weather?.main?.pressure.toString() + " hPa")
         bundle.putString("humidity", weather?.main?.humidity.toString() +  " %")

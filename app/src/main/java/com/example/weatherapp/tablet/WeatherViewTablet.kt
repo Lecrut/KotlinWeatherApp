@@ -2,7 +2,6 @@ package com.example.weatherapp.tablet
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
@@ -108,7 +107,6 @@ class WeatherViewTablet : AppCompatActivity() {
     private fun setAdditionalFrag() : AdditionalDataFragment {
         val additionalDataFrag = AdditionalDataFragment()
         val bundle = Bundle()
-        Log.v("basic1", weather.toString())
 
         bundle.putString("pressure", weather?.main?.pressure.toString() + " hPa")
         bundle.putString("humidity", weather?.main?.humidity.toString() +  " %")
@@ -239,12 +237,10 @@ class WeatherViewTablet : AppCompatActivity() {
     }
 
     private fun setTimer() {
-//        timer = Timer()
         timer.schedule(object : TimerTask(){
             override fun run() {
                 loadForecastData()
                 loadWeatherData()
-                Log.v("TIMER: aktualizacja dla: ", location)
             }
         },0,  1000
         )

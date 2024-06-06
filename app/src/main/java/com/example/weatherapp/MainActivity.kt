@@ -106,7 +106,6 @@ class MainActivity : AppCompatActivity() {
             locationList = list.toSet()
             listOfCities = locationList.toMutableSet()
             layout.removeAllViews()
-            Log.v("MIASTA: clearAll(): ", loadLocations().toString())
         }
 
 
@@ -310,7 +309,6 @@ class MainActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json = gson.toJson(locations)
-        Log.v("flaga json", json)
         editor.putString("locations", json)
         editor.apply()
     }
@@ -367,10 +365,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val removeButton = Button(this).apply {
-            text = "Usuń"
+            text = "X"
             layoutParams = LinearLayout.LayoutParams(
                 0,
-                LinearLayout.LayoutParams.WRAP_CONTENT, // Wysokość
+                LinearLayout.LayoutParams.WRAP_CONTENT,
                 0.2f) // waga
             setTextColor(Color.RED)
             setOnClickListener {
@@ -438,7 +436,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun clearAllCities(layout: LinearLayout, cityList: MutableSet<String>) {
         cityList.forEachIndexed { id, city ->
-            Log.v("MIASTA: usuwam: ", city)
             removeButton(layout, id)
             removeLocation(city)
         }

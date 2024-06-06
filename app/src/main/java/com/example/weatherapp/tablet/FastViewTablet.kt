@@ -2,7 +2,6 @@ package com.example.weatherapp.tablet
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
@@ -108,7 +107,6 @@ class FastViewTablet : AppCompatActivity() {
     private fun setAdditionalFrag() : AdditionalDataFragment {
         val additionalDataFrag = AdditionalDataFragment()
         val bundle = Bundle()
-        Log.v("basic1", weather.toString())
 
         bundle.putString("pressure", weather?.main?.pressure.toString() + " hPa")
         bundle.putString("humidity", weather?.main?.humidity.toString() +  " %")
@@ -244,7 +242,6 @@ class FastViewTablet : AppCompatActivity() {
             override fun run() {
                 loadForecastData()
                 loadWeatherData()
-                Log.v("TIMER: aktualizacja dla: ", location)
             }
         },0,  10000 * 15
         )
@@ -256,7 +253,7 @@ class FastViewTablet : AppCompatActivity() {
         val json = sharedPreferences.getString("locations", null)
         val type = object : TypeToken<Set<String>>() {}.type
         var locations: Set<String> = gson.fromJson(json, type)
-        Log.v("MIASTA: usuwam lokalizacje: ", locationToRemove)
+
         if (locations.contains(locationToRemove)) {
             locations = locations.filter { it != locationToRemove }.toSet()
             val editor = sharedPreferences.edit()
@@ -270,14 +267,7 @@ class FastViewTablet : AppCompatActivity() {
         val file = File(dir, "$locationToRemove.xml")
 
         if (file.exists()) {
-            val deleted = file.delete()
-            if (deleted) {
-                Log.v("Usuwanie pliku", "Plik $locationToRemove SharedPreferences został usunięty")
-            } else {
-                Log.v("Usuwanie pliku", "Nie udało się usunąć pliku SharedPreferences")
-            }
-        } else {
-            Log.v("Usuwanie pliku", "Plik SharedPreferences nie istnieje")
+            file.delete()
         }
     }
 }

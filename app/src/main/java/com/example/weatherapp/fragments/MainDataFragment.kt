@@ -1,7 +1,6 @@
 package com.example.weatherapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,12 +30,6 @@ class MainDataFragment : Fragment() {
         val sunset = arguments?.getString("sunset")
         val weatherID = arguments?.getString("weatherID")
         val feelLikeTemp = arguments?.getString("feelLike")
-
-        Log.v("basic", city.toString())
-        Log.v("basic", temp.toString())
-        Log.v("basic", status.toString())
-        Log.v("basic", time.toString())
-
 
         view.findViewById<TextView>(R.id.cityName).text = city
         view.findViewById<TextView>(R.id.temperature).text = temp
