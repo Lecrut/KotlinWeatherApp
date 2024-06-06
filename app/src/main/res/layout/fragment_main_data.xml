@@ -125,9 +125,7 @@
                 android:fontFamily="sans-serif"
                 android:textColor="@color/white"/>
         </LinearLayout>
-<!--            <Space-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="wrap_content"/>-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

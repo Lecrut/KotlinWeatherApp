@@ -18,7 +18,6 @@ import java.util.Date
 import java.util.TimeZone
 import java.util.Timer
 import java.util.TimerTask
-import kotlin.math.min
 
 class WeatherViewTablet : AppCompatActivity() {
 
@@ -48,13 +47,6 @@ class WeatherViewTablet : AppCompatActivity() {
         setForecastFrag()
     }
 
-    private fun isTablet(): Boolean {
-        val metrics = resources.displayMetrics
-        val dpWidth = metrics.widthPixels / metrics.density
-        val dpHeight = metrics.heightPixels / metrics.density
-        val smallestWidth = min(dpWidth, dpHeight)
-        return smallestWidth >= 600
-    }
     override fun onPause() {
         super.onPause()
         timer.cancel()
