@@ -1,4 +1,4 @@
-package com.example.weatherapp.citiesData
+package com.example.weatherapp.models.citiesData
 
 data class citiesItem(
     val country: String,

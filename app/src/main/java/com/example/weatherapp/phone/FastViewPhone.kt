@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.weatherapp.R
-import com.example.weatherapp.utils.Distance
-import com.example.weatherapp.utils.Temperatures
+import com.example.weatherapp.models.utils.Distance
+import com.example.weatherapp.models.utils.Temperatures
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File

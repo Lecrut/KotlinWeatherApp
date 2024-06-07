@@ -5,12 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
-import com.example.weatherapp.forecastData.forecastData
+import com.example.weatherapp.models.forecastData.forecastData
 import com.example.weatherapp.fragments.AdditionalDataFragment
 import com.example.weatherapp.fragments.ForecastDataFragment
 import com.example.weatherapp.fragments.MainDataFragment
-import com.example.weatherapp.utils.Distance
-import com.example.weatherapp.utils.Temperatures
+import com.example.weatherapp.models.utils.Distance
+import com.example.weatherapp.models.utils.Temperatures
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import layout.weatherData
@@ -78,7 +78,7 @@ class FastViewTablet : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(location, Context.MODE_PRIVATE)
         val gson = Gson()
         val json = sharedPreferences?.getString("forecast", "")
-        return gson.fromJson(json, com.example.weatherapp.forecastData.forecastData::class.java)
+        return gson.fromJson(json, forecastData::class.java)
     }
     private fun setBasicFrag () : MainDataFragment {
         val basicDataFrag = MainDataFragment()

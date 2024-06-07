@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.weatherapp.R
-import com.example.weatherapp.utils.Distance
-import com.example.weatherapp.utils.Temperatures
+import com.example.weatherapp.models.utils.Distance
+import com.example.weatherapp.models.utils.Temperatures
 
 class WeatherViewPagerPhone : AppCompatActivity() {
 

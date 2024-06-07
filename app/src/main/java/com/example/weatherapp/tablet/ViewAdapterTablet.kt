@@ -5,12 +5,12 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.weatherapp.forecastData.forecastData
+import com.example.weatherapp.models.forecastData.forecastData
 import com.example.weatherapp.fragments.AdditionalDataFragment
 import com.example.weatherapp.fragments.ForecastDataFragment
 import com.example.weatherapp.fragments.MainDataFragment
-import com.example.weatherapp.utils.Distance
-import com.example.weatherapp.utils.Temperatures
+import com.example.weatherapp.models.utils.Distance
+import com.example.weatherapp.models.utils.Temperatures
 import com.google.gson.Gson
 import layout.weatherData
 import java.text.SimpleDateFormat
