@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var city_input: EditText
     private lateinit var search_button: Button
     private lateinit var layout: LinearLayout
-
+    private val timer = Timer()
 
     var selectedCity: String = ""
     var listOfCities: MutableSet<String>? = null
@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        runTimer()
         setTempSettings()
         setDistSettings()
 
@@ -109,6 +108,16 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        runTimer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timer.cancel()
     }
 
     private fun getGeoLocations(city: String, context: Context) {
@@ -418,13 +427,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun runTimer() {
-        val timer = Timer()
+
         timer.schedule(object : TimerTask(){
             override fun run() {
                 listOfCities?.forEachIndexed{ id, location ->
                     getWeather(location)
                     getForecast(location)
                 }
+                Log.v("API-Timer", "Incorrect location")
+
             }
         },0,  15000
         )
