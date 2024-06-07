@@ -13,7 +13,7 @@
         android:name="com.example.weatherapp.fragments.MainDataFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/background_one"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/fragment_additional_data"
         />
@@ -23,7 +23,7 @@
         android:name="com.example.weatherapp.fragments.AdditionalDataFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cyan"
+        android:background="@color/background_one"
         app:layout_constraintTop_toBottomOf="@+id/fragment_basic_weather"
         app:layout_constraintBottom_toTopOf="@+id/fragment_forecast"
         />
@@ -33,7 +33,7 @@
         android:name="com.example.weatherapp.fragments.ForecastDataFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:background="@color/background_one"
         app:layout_constraintTop_toBottomOf="@+id/fragment_additional_data"
         app:layout_constraintBottom_toBottomOf="parent"
         />
